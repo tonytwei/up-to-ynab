@@ -9,6 +9,4 @@ dist
 *.iml
 .env
 src/accountMapping.*
-src/config.*
 !src/accountMapping.example.json
-!src/config.example.json
