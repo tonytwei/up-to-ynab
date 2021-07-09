@@ -3,7 +3,7 @@ import { SaveTransaction as YnabTransaction } from "ynab/dist/api";
 import { createTransaction, getPayees, updateTransaction } from "./ynab/api";
 import { upAccountIdToYnabAccountId, upToYnabTransaction } from "./transformer";
 
-const config = require('./config.json');
+const config = require("./config.json");
 const up = new UpApi(config.upApiSecret || "");
 
 async function buildYnabCreateTransaction(upTransaction: UpTransaction): Promise<YnabTransaction | null> {

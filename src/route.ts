@@ -4,7 +4,7 @@ import { transactionCreated, transactionUpdated } from "./processing";
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
 
-const config = require('./config.json');
+const config = require("./config.json");
 const app = new Koa();
 
 app.use(bodyParser());
