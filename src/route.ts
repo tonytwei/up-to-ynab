@@ -4,15 +4,14 @@ import { transactionCreated, transactionUpdated } from "./processing";
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
 
-const UP_WEBHOOK_SECRET = process.env.UP_WEBHOOK_SECRET || "";
-
+const config = require('./config.json');
 const app = new Koa();
 
 app.use(bodyParser());
 app.use(async (ctx) => {
   const body = ctx.request.rawBody || "";
   const headers = Object.entries(ctx.header).reduce((acc, [key, val]) => ({ ...acc, [key.toLowerCase()]: val }), {});
-  const buildSignature = (body) => createHmac("sha256", UP_WEBHOOK_SECRET).update(body).digest("hex");
+  const buildSignature = (body) => createHmac("sha256", config.upWebhookSecret).update(body).digest("hex");
 
   console.log(`Webhook: ${body}`);
   const expectedSignature = headers["x-up-authenticity-signature"];

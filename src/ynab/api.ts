@@ -1,7 +1,9 @@
 import { API, Payee, SaveTransaction as YnabTransaction, TransactionDetail } from "ynab";
 
-const YNAB_BUDGET_ID = process.env.YNAB_BUDGET_ID || "";
-const YNAB_API_KEY = process.env.YNAB_API_KEY || "";
+
+const config = require('../config.json');
+const YNAB_BUDGET_ID = config.ynabBudgetId || "";
+const YNAB_API_KEY = config.ynabApiSecret || "";
 
 const client = new API(YNAB_API_KEY);
 
