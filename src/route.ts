@@ -1,28 +1,31 @@
 import { WebhookEventCallback } from "up-bank-api";
-import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
 import { createHmac } from "crypto";
 import { transactionCreated, transactionUpdated } from "./processing";
+import * as Koa from "koa";
+import * as bodyParser from "koa-bodyparser";
 
 const UP_WEBHOOK_SECRET = process.env.UP_WEBHOOK_SECRET || "";
 
-const buildSignature = (body) => createHmac("sha256", UP_WEBHOOK_SECRET).update(body).digest("hex");
+const app = new Koa()
 
-export async function upWebhook(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
-  const body = event.body || "";
-  const headers = Object.entries(event.headers).reduce((acc, [key, val]) => ({ ...acc, [key.toLowerCase()]: val }), {});
+app.use(bodyParser())
+app.use(async (ctx) => {
+  const body = ctx.request.rawBody || "";
+  const headers = Object.entries(ctx.header).reduce((acc, [key, val]) => ({ ...acc, [key.toLowerCase()]: val }), {});
+  const buildSignature = (body) => createHmac("sha256", UP_WEBHOOK_SECRET).update(body).digest("hex");
 
   console.log(`Webhook: ${body}`);
   const expectedSignature = headers["x-up-authenticity-signature"];
   const actualSignature = buildSignature(body);
   if (expectedSignature !== actualSignature) {
     console.log(`Invalid signature - expected: ${expectedSignature}, actual: ${actualSignature}`);
-    return { statusCode: 403, body: "" };
+    ctx.throw(401);
   }
 
   const parsedBody = JSON.parse(body);
 
   if (!parsedBody.data || parsedBody.data.type !== "webhook-events") {
-    return { statusCode: 200, body: "" };
+    ctx.status = 200
   }
 
   const webhookEventData = (parsedBody as WebhookEventCallback).data;
@@ -37,5 +40,9 @@ export async function upWebhook(event: APIGatewayProxyEvent, context: Context): 
     console.log("Skipping");
   }
 
-  return { statusCode: 200, body: "" };
-}
+  ctx.status = 200
+});
+
+app.on('error', console.error);
+
+export default app;

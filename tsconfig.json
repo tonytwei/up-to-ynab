@@ -5,12 +5,14 @@
     "sourceMap": true,
     "allowJs": true,
     "target": "es2017",
-    "outDir": ".build",
+    "outDir": "dist",
     "module": "commonjs",
     "moduleResolution": "node",
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "lib": ["es2017"],
-    "rootDir": "./",
-    "resolveJsonModule": true
+    "rootDir": "src",
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
