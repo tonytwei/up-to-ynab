@@ -6,9 +6,9 @@ import * as bodyParser from "koa-bodyparser";
 
 const UP_WEBHOOK_SECRET = process.env.UP_WEBHOOK_SECRET || "";
 
-const app = new Koa()
+const app = new Koa();
 
-app.use(bodyParser())
+app.use(bodyParser());
 app.use(async (ctx) => {
   const body = ctx.request.rawBody || "";
   const headers = Object.entries(ctx.header).reduce((acc, [key, val]) => ({ ...acc, [key.toLowerCase()]: val }), {});
@@ -25,7 +25,7 @@ app.use(async (ctx) => {
   const parsedBody = JSON.parse(body);
 
   if (!parsedBody.data || parsedBody.data.type !== "webhook-events") {
-    ctx.status = 200
+    ctx.status = 200;
   }
 
   const webhookEventData = (parsedBody as WebhookEventCallback).data;
@@ -40,9 +40,9 @@ app.use(async (ctx) => {
     console.log("Skipping");
   }
 
-  ctx.status = 200
+  ctx.status = 200;
 });
 
-app.on('error', console.error);
+app.on("error", console.error);
 
 export default app;
