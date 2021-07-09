@@ -2,9 +2,8 @@
 node_modules
 jspm_packages
 
-# Serverless directories
-.serverless
-.build
+# TypeScript build directory
+dist
 
 .idea
 *.iml
