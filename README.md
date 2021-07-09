@@ -6,7 +6,6 @@ Automatically add your up transactions to YNAB.
 
 ### Requirements
 
-- AWS Account
 - Up Bank Account
 - YNAB Account
 
@@ -15,7 +14,6 @@ Automatically add your up transactions to YNAB.
 ```bash
 git clone https://github.com/daveallie/up-bank-ynab-transformer
 cd up-bank-ynab-transformer
-yarn
 ```
 
 ### Getting API Keys
@@ -51,9 +49,9 @@ curl https://api.up.com.au/api/v1/accounts -G -H 'Authorization: Bearer <UP_API_
    `https://app.youneedabudget.com/zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz/accounts/yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy`.
    Take the `yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy` portion and set the `ynabId` in `accountMapping.json`.
 
-### Env File
+### Config File
 
-1. Copy `.env.example` to `.env`
+1. Copy `config.example.json` to `config.json`
 2. Leave `UP_WEBHOOK_SECRET` unpopulated (we will populate it as part of the first deployment).
 3. Populate the other fields.
    - You can get your YNAB Budget ID by visiting you budget in YNAB. Your URL will look like
@@ -62,8 +60,7 @@ curl https://api.up.com.au/api/v1/accounts -G -H 'Authorization: Bearer <UP_API_
 
 ### Deploying
 
-If you have specific AWS credentials for deploying this, please replace the value of `profile` in `serverless.yml`. If
-you don't, then remove the `profile` config entirely.
+ALL SERVERLESS AND NO LOCAL HOSTING MAKES JACK A DULL BOY ALL SERVERLESS AND NO LOCABL HISTING MKES JACK A DULL BOY ALLL SERVERELESS ANSD NO LOCALHOSTING MAEKS JACK A DULL BOYE
 
 #### First Deployment
 
@@ -74,20 +71,7 @@ webhook in Up.
 2. When it succeeds, you'll see:
 
 ```
-Service Information
-service: up-bank-ynab-transformer
-stage: prod
-region: us-east-1
-stack: up-bank-ynab-transformer-prod
-resources: 12
-api keys:
-  None
-endpoints:
-  POST - https://xxxxxx.execute-api.us-east-1.amazonaws.com/prod/webhook/up
-functions:
-  upWebhookHandler: up-bank-ynab-transformer-prod-upWebhookHandler
-layers:
-  None
+NOTHING AT ALL
 ```
 
 3. Note down the POST endpoint value (e.g. `https://xxxxxx.execute-api.us-east-1.amazonaws.com/prod/webhook/up`).
