@@ -18,10 +18,10 @@ curl https://api.up.com.au/api/v1/webhooks \
   -H "Authorization: Bearer ${api_key}" \
   -H 'Content-Type: application/json' \
   --data-binary "{
-    'data': {
-      'attributes': {
-        'url': '${webhook}',
-        'description': 'Prod YNAB webook'
+    \"data\": {
+      \"attributes\": {
+        \"url\": \"${webhook}\",
+        \"description\": \"Prod YNAB webhook\"
       }
     }
   }"
