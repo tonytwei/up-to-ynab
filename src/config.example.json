@@ -1,6 +1,6 @@
 {
-  "upWebhookSecret": "",
   "upApiSecret": "",
+  "ynabApiSecret": "",
   "ynabBudgetId": "",
-  "ynabApiSecret": ""
+  "upWebhookSecret": ""
 }
