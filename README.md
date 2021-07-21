@@ -21,7 +21,7 @@ cd up-bank-ynab-transformer
 
 ### Config File
 
-1. Copy `config.example.json` to `config.json`
+1. Copy `src/config.example.json` to `src/config.json`
 2. Get the needed tokens by doing the following:
 
 #### UpApiSecret
