@@ -3,21 +3,19 @@
 Automatically add your up transactions to YNAB.  
 (This one doesn't use serverless stuff)
 
-## Setup
-
-### Requirements
+## Requirements
 
 - Up Bank Account
 - YNAB Account
 
-### Checking out
+## Checking out
 
 ```bash
-git clone https://github.com/daveallie/up-bank-ynab-transformer
-cd up-bank-ynab-transformer
+git clone https://github.com/NotActuallyTerry/up-to-ynab
+cd up-to-ynab
 ```
 
-### Configuring your bridge
+## Configuring your bridge
 
 ### Config File
 
