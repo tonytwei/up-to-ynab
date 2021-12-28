@@ -7,4 +7,7 @@ COPY . /app/
 
 RUN npm i
 
+ENV PORT=28104
+EXPOSE 28104
+
 CMD ["npm", "run", "serve"]
