@@ -3,6 +3,8 @@
 Automatically add your up transactions to YNAB.  
 (This one doesn't use serverless stuff)
 
+Want something you can deploy into your serverless environment? [Check out the original version by daveallie!](https://github.com/daveallie/up-bank-ynab-transformer)
+
 ## Requirements
 
 - Up Bank Account
