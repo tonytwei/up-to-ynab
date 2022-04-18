@@ -11,14 +11,16 @@ COPY . /build/
 # Install node deps and build
 RUN npm i && npm run build
 
-# Start fresh and copy in the built app
+# Start fresh
 FROM alpine
 WORKDIR /app/
-COPY --from=build /build/dist/ ./
-COPY --from=build /build/node_modules/ ./node_modules/
 
 # Add runtime dependencies
 RUN apk add nodejs
+
+# Copy in the built app
+COPY --from=build /build/dist/ ./
+COPY --from=build /build/node_modules/ ./node_modules/
 
 # Set and expose the default port
 ENV PORT=28104
