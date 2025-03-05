@@ -9,6 +9,7 @@ Want something you can deploy into your serverless environment? [Check out the o
 
 - Up Bank Account
 - YNAB Account
+- AWS Account
 
 ## Checking out
 
@@ -17,7 +18,7 @@ git clone https://github.com/NotActuallyTerry/up-to-ynab
 cd up-to-ynab
 ```
 
-## Configuring your bridge
+## Configuration
 
 ### Config File
 
@@ -34,16 +35,20 @@ Head to https://app.youneedabudget.com/settings/developer and create a new Perso
 
 #### ynabBudgetId
 
-You can get your YNAB Budget ID by visiting you budget in YNAB. Your URL will look like:   
+You can get your YNAB Budget ID by visiting your budget in YNAB. Your URL will look like:   
 `https://app.youneedabudget.com/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.   
 The `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` portion is your YNAB Budget ID.
 
 #### upWebhookSecret
 
-Figure out where on the web this script will be reachable, and run this:   
-`./upwebhook.sh --api_key up:demo:WknwVXxOvTk2AfTU --webhook https://up-api.example.com/ping-me`   
-REPLACING THE DEFAULTS   
-In amongst this, you'll find a `secretKey` property, grab the value of this and yeet it into your config.
+1. Create a AWS Lambda Function
+2. Create an AWS Api Gateway
+3. Create a route e.g. /up-to-ynab
+4. Configure route to integrate with lambda function
+5. Deploy api route, save url e.g. https://xxxx.execute-api.us-east-1.amazonaws.com/up-to-ynab
+6. Run script
+`./upwebhook.sh --api_key <UpApiSecrect> --webhook <ApiRoute>`
+6. Script should return `secretKey` property, use as `upWebhookSecret`
 
 ### Setting Up Account Mappings
 
@@ -64,6 +69,16 @@ curl https://api.up.com.au/api/v1/accounts -G -H 'Authorization: Bearer <UP_API_
 6. For each mapping in `accountMapping.json`, open the YNAB account, your URL should look like
    `https://app.youneedabudget.com/zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz/accounts/yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy`.
    Take the `yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy` portion and set the `ynabId` in `accountMapping.json`.
+
+## Deployment
+
+1. Run `tsc`, creating a `dist` directory
+2. Run `npm install --production`
+3. Copy `node_modules` into dist directory
+4. Zip `dist` directroy
+5. Upload zip to lambda function
+6. Update lambda function's runtime to Node.js 22.x
+7. Update lambda function's handler to `lambda.handler`
 
 ## Development
 
