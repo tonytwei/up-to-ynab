@@ -79,6 +79,7 @@ curl https://api.up.com.au/api/v1/accounts -G -H 'Authorization: Bearer <UP_API_
 5. Upload zip to lambda function
 6. Update lambda function's runtime to Node.js 22.x
 7. Update lambda function's handler to `lambda.handler`
+8. Increase lambda function's timeout configuration (e.g. from 3s to 1min), due to slow api responses
 
 ## Development
 
