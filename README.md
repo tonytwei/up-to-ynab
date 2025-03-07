@@ -28,6 +28,7 @@ cd up-to-ynab
 #### UpApiSecret
 
 Head to https://api.up.com.au/getting_started and follow the instructions to get a key.
+NOTE: Be aware of 48 hour token or permanent until revoked token
 
 #### ynabApiSecret
 
